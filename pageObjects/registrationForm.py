@@ -9,9 +9,10 @@ class Registration:
     txt_email_id = "userEmail"
     radio_male_xpath = "/html/body/div[2]/div/div/div[2]/div[2]/div[2]/form/div[3]/div[2]/div[1]"
     txt_mobile_id = "userNumber"
-    txt_DoB_id = "dateOfBirth"
-    txt_subjects_id = "subjectsContainer"
-    check_reading_id = "hobbies-checkbox-2"
+    select_DoB_id = "dateOfBirth"
+    item_date11_xpath = "/html/body/div[2]/div/div/div[2]/div[2]/div[2]/form/div[5]/div[2]/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div[1]"
+    txt_subjects_id = "subjectsInput"
+    check_reading_xpath = "/html/body/div[2]/div/div/div[2]/div[2]/div[2]/form/div[7]/div[2]/div[2]"
     btn_uploadPicture_id = "uploadPicture"
     txt_address_id = "currentAddress"
     list_state_id = "react-select-3-input"
@@ -19,6 +20,7 @@ class Registration:
     list_city_id = "react-select-4-input"
     item_jaipur_xpath = "/html/body/div[2]/div/div/div[2]/div[2]/div[2]/form/div[10]/div[3]/div/div/div[1]/div[1]"
     btn_submit_id = "submit"
+    txt_submitAlert_id = "example-modal-sizes-title-lg"
 
     def __init__(self, setup):
         self.driver = setup
@@ -44,14 +46,15 @@ class Registration:
     def input_phone_number(self, mobile):
         self.driver.find_element(By.ID, self.txt_mobile_id).send_keys(mobile)
 
-    def input_dob(self, birthdate):
-        self.driver.find_element(By.ID, self.txt_DoB_id).send_keys(birthdate)
+    def select_dob(self):
+        self.driver.find_element(By.ID, self.select_DoB_id).click()
+        self.driver.find_element(By.XPATH, self.item_date11_xpath).click()
 
     def input_subjects(self, subjects):
         self.driver.find_element(By.ID, self.txt_subjects_id).send_keys(subjects)
 
     def select_hobbies(self):
-        self.driver.find_element(By.ID, self.check_reading_id).click()
+        self.driver.find_element(By.XPATH, self.check_reading_xpath).click()
 
     def input_picture(self, picture):
         self.driver.find_element(By.ID, self.btn_uploadPicture_id).send_keys(picture)
@@ -69,3 +72,6 @@ class Registration:
 
     def click_submit(self):
         self.driver.find_element(By.ID, self.btn_submit_id).click()
+
+    def verify_alert(self):
+        self.driver.find_element(By.ID, self.txt_submitAlert_id)

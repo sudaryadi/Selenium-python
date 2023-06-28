@@ -10,8 +10,8 @@ class TestRegister:
     male = "male"
     mobile = "08992995299"
     birthdate = "15 November 1993"
-    subjects = "Ilmu Komputer"
-    picture = "images/img.png"
+    subjects = "English"
+    picture = "C:/Users/tritr/AquaProjects/Demo-QA/images/img.png"
     address = "Bandung"
 
     def test_filling_registration_form(self, setup):
@@ -33,8 +33,8 @@ class TestRegister:
         self.reg.select_gender_male()
         sleep(3)
         self.reg.input_phone_number(self.mobile)
-        sleep(3)
-        self.reg.input_dob(self.birthdate)
+#       sleep(3)
+#       self.reg.select_dob() #
         sleep(3)
         self.reg.input_subjects(self.subjects)
         sleep(3)
@@ -49,3 +49,11 @@ class TestRegister:
         self.reg.select_city()
         sleep(3)
         self.reg.click_submit()
+        sleep(3)
+        submitted = self.reg.verify_alert()
+        confirm_text = "Thanks for submitting the form"
+        if confirm_text in submitted.text:
+            print("Registration is finished.")
+        else:
+            print("Registration is failed.")
+        self.driver.close()
